@@ -1,7 +1,10 @@
 from insert import Insert
-from multiprocessing import Process
+import threading
 
 print("---Inserting image file into foto_pelanggan table---")
 insert = Insert()
-insert.iterating("source_images")
+image_threading = threading.Thread(insert.iterating("source_images"))
 print(insert.countFiles("source_images"))
+
+image_threading.start()
+image_threading.join()
